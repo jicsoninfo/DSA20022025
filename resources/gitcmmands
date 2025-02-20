@@ -1,0 +1,20 @@
+
+
+//To clone the master branch:
+git clone -b master https://github.com/username/repository.git
+git clone -b main https://github.com/username/repository.git
+git branch -a
+
+//If you've already cloned the repository but want to switch between branches (e.g., from main to master or vice versa), you can use the git checkout command:
+git checkout master
+git checkout main
+
+//If the branch doesn’t exist locally yet, you can fetch the remote branches and check out the desired branch:
+
+git fetch
+git checkout master  # Or 'main'
+
+
+//If you are unsure which branches are available on the remote repository, you can check by running:
+git ls-remote --heads https://github.com/username/repository.git
+
