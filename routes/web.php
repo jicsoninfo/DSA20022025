@@ -39,6 +39,15 @@ Route::get('/cdll', function () {
 //=======================================
 
 //=======================================
+//linked list links for practice
+Route::get('/llprac', function () {
+    return view('dsa.ll.bypractice.01ll');
+});
+//=======================================
+
+
+
+//=======================================
 Route::get('/singlylljs', function () {
     return view('dsa.ll.lljs.slljs.singlylljs');
 });
