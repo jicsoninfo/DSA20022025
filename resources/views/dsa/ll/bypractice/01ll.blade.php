@@ -94,6 +94,7 @@
 
 
 <?php
+//llprac route for this page
 
 //Sinlgy linked list
 echo "================Single linked list=======================". "<br>";
@@ -292,127 +293,8 @@ $newscll->show_scll();
 
 
 
-// echo "================Single Circular linked list=======================". "<br>";
-// class NodeSCll{
-//     public $data;
-//     public $next;
+ echo "================ Doubly linked list=======================". "<br>";
 
-//     public function __construct($data){
-//         $this->data = $data;
-//         $this->next = NULL;
-//     }
-// }
-
-// class SCll{
-//     public $head;
-
-//     public function __construct(){
-//         $this->head = NULL;
-//     }
-
-//     // Push node at the front of the circular linked list
-//     public function push_front_scll($data){
-//         $newscll = new NodeSCll($data);
-//         if ($this->head == NULL) {
-//             $this->head = $newscll;
-//             $newscll->next = $this->head;
-//         } else {
-//             $newscll->next = $this->head;
-//             $temp = $this->head;
-//             while ($temp->next != $this->head) {
-//                 $temp = $temp->next;
-//             }
-//             $temp->next = $newscll;
-//             $this->head = $newscll;
-//         }
-//     }
-
-//     // Push node at the back of the circular linked list
-//     public function push_back_scll($data){
-//         $newscll = new NodeSCll($data);
-//         if ($this->head == NULL) {
-//             $this->head = $newscll;
-//             $newscll->next = $this->head;
-//         } else {
-//             $temp = $this->head;
-//             while ($temp->next != $this->head) {
-//                 $temp = $temp->next;
-//             }
-//             $temp->next = $newscll;
-//             $newscll->next = $this->head;  // Close the circular link
-//         }
-//     }
-
-//     // Push node at a specific position in the circular linked list
-//     public function push_atpoint_scll($data, $position){
-//         $newscll = new NodeSCll($data);
-
-//         // If position is 0, insert at the front
-//         if ($position == 0) {
-//             $this->push_front_scll($data);
-//             return;
-//         }
-
-//         if ($this->head == NULL) {
-//             echo "List is empty\n";
-//             return;
-//         }
-
-//         $temp = $this->head;
-//         $current_position = 0;
-
-//         // Traverse the list until the position is found or end of list
-//         while ($temp->next != $this->head && $current_position < $position - 1) {
-//             $temp = $temp->next;
-//             $current_position++;
-//         }
-
-//         // If we are inserting at the end of the list (or beyond last position)
-//         if ($temp->next == $this->head) {
-//             $this->push_back_scll($data);
-//         } else {
-//             $newscll->next = $temp->next;
-//             $temp->next = $newscll;
-//         }
-//     }
-
-//     // Display the circular linked list
-//     public function show_scll(){
-//         if ($this->head == NULL) {
-//             echo "List is empty" . "\n";
-//             return;
-//         } else {
-//             $temp = $this->head;
-//             do {
-//                 //echo $temp->data . " ";
-//                 echo $temp->data ."<br>";
-//                 $temp = $temp->next;
-//             } while ($temp != $this->head);
-//             echo "\n";
-//         }
-//     }
-// }
-
-// // Create an instance of SCll
-// $newscll = new SCll();
-// $newscll->push_front_scll(19);
-// $newscll->push_front_scll(18);
-// $newscll->push_front_scll(17);
-
-// // Show the list after pushing elements at the front
-// $newscll->show_scll();
-
-// // Push element at the back of the list
-// $newscll->push_back_scll(20);
-// $newscll->show_scll();
-
-// // Push element at a specific position
-// $newscll->push_atpoint_scll(25, 2); // Insert 25 at position 2
-// $newscll->show_scll();
-
-// // Push at the end (position out of range)
-// $newscll->push_atpoint_scll(30, 10); // Insert 30 at a position greater than list length
-// $newscll->show_scll();
 
 
 
