@@ -294,14 +294,274 @@ $newscll->show_scll();
 
 
  echo "================ Doubly linked list=======================". "<br>";
+/*
+    class DllNode{
+        public $data;
+        public $prev;
+        public $next;
+
+        public function __construct($data) {
+            $this->data = $data;
+            $this->prev = null;
+            $this->next = null;
+        }
+    }
+
+    class DLL{
+        private $head;
+        private $tail;
+
+        public function __construct(){
+            $this->head = null;
+            $this->tail = null;
+        }
+
+        // Push an element to the front of the list
+        public function push_front_dll($data){
+            $newNode = new DllNode($data);
+
+            if($this->head == null){
+                //If list is empty, the new node is both the head and tail
+                $this->head = $this->tail = $newNode;
+            }else{
+                //Insert at the front
+                $newNode->next = $this->head;
+                $this->head->prev = $newNode;
+                $this->head = $newNode;
+            }
+        }
+        
+        //Display the entire linked list
+        public function display_dll(){
+            if($this->head == NULL){
+                echo "List is empty\n";
+                return;
+            }
+
+            $current = $this->head;
+            while($current != NULL){
+                echo $current->data . "<->";
+                $current = $current->next;
+            }
+                
+            echo "NULL\n";
+        }
+
+    }
 
 
+    //Testin the Double Linked List
+    $dll = new DLL();
+    $dll->push_front_dll(10);
+    $dll->push_front_dll(20);
+    $dll->push_front_dll(30);
+
+    echo "Linked list after operations:\n";
+    $dll->display_dll();
+
+
+*/
 
 
 
 ?>
 
 
+<?php
+/*
+class Node {
+    public $data;
+    public $prev;
+    public $next;
+
+    public function __construct($data) {
+        $this->data = $data;
+        $this->prev = null;
+        $this->next = null;
+    }
+}
+
+class DoublyLinkedList {
+    private $head;
+    private $tail;
+
+    public function __construct() {
+        $this->head = null;
+        $this->tail = null;
+    }
+
+    // Push an element to the front of the list
+    public function push_front($data) {
+        $newNode = new Node($data);
+
+        if ($this->head == null) {
+            // If list is empty, the new node is both the head and tail
+            $this->head = $this->tail = $newNode;
+        } else {
+            // Insert at the front
+            $newNode->next = $this->head;
+            $this->head->prev = $newNode;
+            $this->head = $newNode;
+        }
+    }
+
+    // Push an element to the back of the list
+    public function push_back($data) {
+        $newNode = new Node($data);
+
+        if ($this->tail == null) {
+            // If list is empty, the new node is both the head and tail
+            $this->head = $this->tail = $newNode;
+        } else {
+            // Insert at the back
+            $newNode->prev = $this->tail;
+            $this->tail->next = $newNode;
+            $this->tail = $newNode;
+        }
+    }
+
+    // Push an element at a specific position (index)
+    public function push_atpoint($data, $index) {
+        if ($index < 0) {
+            echo "Invalid index\n";
+            return;
+        }
+
+        $newNode = new Node($data);
+        $current = $this->head;
+        $count = 0;
+
+        // If inserting at the beginning
+        if ($index == 0) {
+            $this->push_front($data);
+            return;
+        }
+
+        while ($current != null && $count < $index) {
+            $current = $current->next;
+            $count++;
+        }
+
+        if ($current == null) {
+            echo "Index out of bounds\n";
+            return;
+        }
+
+        // Insert at the specified point
+        $newNode->next = $current;
+        $newNode->prev = $current->prev;
+        $current->prev->next = $newNode;
+        $current->prev = $newNode;
+    }
+
+    // Delete the front node
+    public function del_front() {
+        if ($this->head == null) {
+            echo "List is empty\n";
+            return;
+        }
+
+        if ($this->head == $this->tail) {
+            // If there is only one node
+            $this->head = $this->tail = null;
+        } else {
+            // Move head to the next node
+            $this->head = $this->head->next;
+            $this->head->prev = null;
+        }
+    }
+
+    // Delete the back node
+    public function del_back() {
+        if ($this->tail == null) {
+            echo "List is empty\n";
+            return;
+        }
+
+        if ($this->head == $this->tail) {
+            // If there is only one node
+            $this->head = $this->tail = null;
+        } else {
+            // Move tail to the previous node
+            $this->tail = $this->tail->prev;
+            $this->tail->next = null;
+        }
+    }
+
+    // Delete node at a specific position
+    public function del_atpoint($index) {
+        if ($this->head == null || $index < 0) {
+            echo "Invalid index or empty list\n";
+            return;
+        }
+
+        $current = $this->head;
+        $count = 0;
+
+        while ($current != null && $count < $index) {
+            $current = $current->next;
+            $count++;
+        }
+
+        if ($current == null) {
+            echo "Index out of bounds\n";
+            return;
+        }
+
+        // If it's the first node
+        if ($current->prev == null) {
+            $this->head = $current->next;
+            if ($this->head != null) {
+                $this->head->prev = null;
+            }
+        } elseif ($current->next == null) {
+            // If it's the last node
+            $this->tail = $current->prev;
+            $this->tail->next = null;
+        } else {
+            // If it's in the middle
+            $current->prev->next = $current->next;
+            $current->next->prev = $current->prev;
+        }
+
+        $current = null;  // Delete node (optional in PHP)
+    }
+
+    // Display the entire linked list
+    public function display() {
+        if ($this->head == null) {
+            echo "List is empty\n";
+            return;
+        }
+
+        $current = $this->head;
+        while ($current != null) {
+            echo $current->data . " <-> ";
+            $current = $current->next;
+        }
+        echo "NULL\n";
+    }
+}
+
+// Testing the Doubly Linked List
+$dl = new DoublyLinkedList();
+$dl->push_back(10);
+$dl->push_back(20);
+$dl->push_back(30);
+$dl->push_front(5);
+$dl->push_atpoint(15, 2);
+
+echo "Linked List after operations:\n";
+$dl->display();
+
+$dl->del_front();
+$dl->del_back();
+$dl->del_atpoint(1);
+
+echo "Linked List after deletion:\n";
+$dl->display();
+*/
+?>
 
 
 
