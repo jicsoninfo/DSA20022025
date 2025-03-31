@@ -173,6 +173,7 @@ echo "================Single linked list=======================". "<br>";
 
 
 echo "================Single Circular linked list=======================". "<br>";
+//llprac route for this page
 class NodeSCll{
         public $data;
         public $next;
@@ -295,6 +296,7 @@ $newscll->show_scll();
 
  echo "================ Doubly linked list=======================". "<br>";
 /*
+//llprac route for this page
     class DllNode{
         public $data;
         public $prev;
@@ -330,6 +332,54 @@ $newscll->show_scll();
                 $this->head = $newNode;
             }
         }
+
+        //Push an element to the back of the list
+        public function push_back_dll($data){
+            $newNode = new DllNode($data);
+
+            if($this->tail == null){
+                //If list is empty, the new node is both the head and tail
+                $this->head = $this->tail = $newNode;
+            }else{
+                //Insert at the back
+                $newNode->prev = $this->tail;
+                $this->tail->next = $newNode;
+                $this->tail = $newNode;
+            }
+        }
+
+        //Push an element at a specific position (index)
+        public function push_atpoint_dll($data, $index){
+            if($index<0){
+                echo "Invalid index\n";
+                return;
+            }
+
+            $newNode = New DllNode($data);
+            $current = $this->head;
+            $count = 0;
+
+            //If inserting at the begining
+            if($index == 0){
+                $this->push_front_dll($data);
+                return;
+            }
+
+            while($current != null && $count < $index){
+                $current = $current->next;
+                $count++;
+            }
+
+            if($current == null) {
+                echo "Index out of bounds'n";
+            }
+
+            //Insert at the specified point
+            $newNode->next = $current;
+            $newNode->prev = $current->prev;
+            $current->prev->next = $newNode;
+            $current->prev  = $newNode;
+        }
         
         //Display the entire linked list
         public function display_dll(){
@@ -356,11 +406,20 @@ $newscll->show_scll();
     $dll->push_front_dll(20);
     $dll->push_front_dll(30);
 
+    $dll->push_back_dll(40);
+    $dll->push_back_dll(50);
+
+    $dll->push_atpoint_dll(60,4);
+
     echo "Linked list after operations:\n";
     $dll->display_dll();
 
-
+    Work Report:- 31-03-2025
+    Community-marktz:- Changed in backend in admin panel, showing shipping charge according to shipping country added by partners, on cart section changed in shipping vat calculation.
+    Loadchecker:- Changed in saftey inspection post API, giving error 500, changed data sending fromat, now data sending in form body.
 */
+
+
 
 
 
