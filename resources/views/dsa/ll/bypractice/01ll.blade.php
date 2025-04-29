@@ -380,6 +380,45 @@ $newscll->show_scll();
             $current->prev->next = $newNode;
             $current->prev  = $newNode;
         }
+
+        //Delete the front node
+        public function del_front_dll(){
+            if($this->head == NULL){
+                echo "List is empty\n";
+                return;
+            }
+
+            if($this->head == $this->tail){
+                //If there is only one node
+                $this->head = $this->tail = null;
+            }else{
+                //Mode head to the next node
+                $this->head = $this->head->next;
+                $this->head->prev = null;
+            }
+        }
+
+        //Delete the back node
+        public function del_back_dll(){
+            if($this->tail == NULL){
+                echo "List is empty\n";
+                return;
+            }
+
+            if($this->head == $this->tail){
+                //If there is only one node
+                $this->head = $this->tail = null;
+            }else{
+                //Mode tail to the previous node
+                $this->tail = $this->tail->prev;
+                $this->tail->next = null;
+            }
+        }
+
+        //Delete node at a specific position
+        public function del_atpoint_dll($index){
+        
+        }
         
         //Display the entire linked list
         public function display_dll(){
@@ -619,6 +658,25 @@ $dl->del_atpoint(1);
 
 echo "Linked List after deletion:\n";
 $dl->display();
+*/
+
+
+/*
+Django python
+
+pip install django
+django-admin startproject ecommerce
+cd ecommerce
+python manage.py startapp store
+python manage.py migrate
+python manage.py runserver
+
+pip list
+pip show <package-name>
+pip show django
+pip freeze > requirements.txt
+pip list --outdated
+
 */
 ?>
 
