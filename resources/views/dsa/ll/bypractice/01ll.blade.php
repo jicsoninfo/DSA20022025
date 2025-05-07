@@ -295,7 +295,7 @@ $newscll->show_scll();
 
 
  echo "================ Doubly linked list=======================". "<br>";
-/*
+
 //llprac route for this page
     class DllNode{
         public $data;
@@ -417,7 +417,42 @@ $newscll->show_scll();
 
         //Delete node at a specific position
         public function del_atpoint_dll($index){
-        
+            if($this->head == NULL || $index<0){
+                echo "Invalid index or empty list\n";
+                return;
+            }
+
+            $current = $this->head;
+            $count = 0;
+
+            while($current != NULL && $count < $index){
+                $current = $current->next;
+                $count++;
+            }
+
+            if($current == NULL){
+                echo "Index out of bounds\n";
+                return ;
+            }
+
+            //If it's the first node
+
+            if($current->prev == NULL){
+                $this->head = $current->next;
+                if($this->head != NULL){
+                    $this->head->prev = NULL;
+                }
+            }elseif($current->next == NULL){
+                //If it's the last node
+                $this->tail = $current->prev;
+                $this->tail->next = NULL;
+            }else{
+                //If it's in the middle
+                $current->prev->next = $current->next;
+                $current->next->prev = $current->prev;
+            }
+
+            $current = NULL; //Delte node
         }
         
         //Display the entire linked list
@@ -429,11 +464,13 @@ $newscll->show_scll();
 
             $current = $this->head;
             while($current != NULL){
-                echo $current->data . "<->";
+                //echo $current->data . "<->";
+                 echo $current->data . "<br>";
                 $current = $current->next;
             }
                 
             echo "NULL\n";
+            //echo "\n";
         }
 
     }
@@ -444,19 +481,28 @@ $newscll->show_scll();
     $dll->push_front_dll(10);
     $dll->push_front_dll(20);
     $dll->push_front_dll(30);
+    $dll->push_front_dll(90);
 
     $dll->push_back_dll(40);
     $dll->push_back_dll(50);
+    $dll->push_back_dll(70);
+    $dll->push_back_dll(80);
 
     $dll->push_atpoint_dll(60,4);
 
-    echo "Linked list after operations:\n";
+    echo "Linked list after operations:\n" ."<br>";
     $dll->display_dll();
 
-    Work Report:- 31-03-2025
-    Community-marktz:- Changed in backend in admin panel, showing shipping charge according to shipping country added by partners, on cart section changed in shipping vat calculation.
-    Loadchecker:- Changed in saftey inspection post API, giving error 500, changed data sending fromat, now data sending in form body.
-*/
+
+
+    $dll->del_front_dll();
+    $dll->del_back_dll();
+    $dll->del_atpoint_dll(4);
+
+    echo "Linked List after deletion:\n";
+    $dll->display_dll();
+
+
 
 
 
@@ -467,198 +513,7 @@ $newscll->show_scll();
 
 <?php
 /*
-class Node {
-    public $data;
-    public $prev;
-    public $next;
 
-    public function __construct($data) {
-        $this->data = $data;
-        $this->prev = null;
-        $this->next = null;
-    }
-}
-
-class DoublyLinkedList {
-    private $head;
-    private $tail;
-
-    public function __construct() {
-        $this->head = null;
-        $this->tail = null;
-    }
-
-    // Push an element to the front of the list
-    public function push_front($data) {
-        $newNode = new Node($data);
-
-        if ($this->head == null) {
-            // If list is empty, the new node is both the head and tail
-            $this->head = $this->tail = $newNode;
-        } else {
-            // Insert at the front
-            $newNode->next = $this->head;
-            $this->head->prev = $newNode;
-            $this->head = $newNode;
-        }
-    }
-
-    // Push an element to the back of the list
-    public function push_back($data) {
-        $newNode = new Node($data);
-
-        if ($this->tail == null) {
-            // If list is empty, the new node is both the head and tail
-            $this->head = $this->tail = $newNode;
-        } else {
-            // Insert at the back
-            $newNode->prev = $this->tail;
-            $this->tail->next = $newNode;
-            $this->tail = $newNode;
-        }
-    }
-
-    // Push an element at a specific position (index)
-    public function push_atpoint($data, $index) {
-        if ($index < 0) {
-            echo "Invalid index\n";
-            return;
-        }
-
-        $newNode = new Node($data);
-        $current = $this->head;
-        $count = 0;
-
-        // If inserting at the beginning
-        if ($index == 0) {
-            $this->push_front($data);
-            return;
-        }
-
-        while ($current != null && $count < $index) {
-            $current = $current->next;
-            $count++;
-        }
-
-        if ($current == null) {
-            echo "Index out of bounds\n";
-            return;
-        }
-
-        // Insert at the specified point
-        $newNode->next = $current;
-        $newNode->prev = $current->prev;
-        $current->prev->next = $newNode;
-        $current->prev = $newNode;
-    }
-
-    // Delete the front node
-    public function del_front() {
-        if ($this->head == null) {
-            echo "List is empty\n";
-            return;
-        }
-
-        if ($this->head == $this->tail) {
-            // If there is only one node
-            $this->head = $this->tail = null;
-        } else {
-            // Move head to the next node
-            $this->head = $this->head->next;
-            $this->head->prev = null;
-        }
-    }
-
-    // Delete the back node
-    public function del_back() {
-        if ($this->tail == null) {
-            echo "List is empty\n";
-            return;
-        }
-
-        if ($this->head == $this->tail) {
-            // If there is only one node
-            $this->head = $this->tail = null;
-        } else {
-            // Move tail to the previous node
-            $this->tail = $this->tail->prev;
-            $this->tail->next = null;
-        }
-    }
-
-    // Delete node at a specific position
-    public function del_atpoint($index) {
-        if ($this->head == null || $index < 0) {
-            echo "Invalid index or empty list\n";
-            return;
-        }
-
-        $current = $this->head;
-        $count = 0;
-
-        while ($current != null && $count < $index) {
-            $current = $current->next;
-            $count++;
-        }
-
-        if ($current == null) {
-            echo "Index out of bounds\n";
-            return;
-        }
-
-        // If it's the first node
-        if ($current->prev == null) {
-            $this->head = $current->next;
-            if ($this->head != null) {
-                $this->head->prev = null;
-            }
-        } elseif ($current->next == null) {
-            // If it's the last node
-            $this->tail = $current->prev;
-            $this->tail->next = null;
-        } else {
-            // If it's in the middle
-            $current->prev->next = $current->next;
-            $current->next->prev = $current->prev;
-        }
-
-        $current = null;  // Delete node (optional in PHP)
-    }
-
-    // Display the entire linked list
-    public function display() {
-        if ($this->head == null) {
-            echo "List is empty\n";
-            return;
-        }
-
-        $current = $this->head;
-        while ($current != null) {
-            echo $current->data . " <-> ";
-            $current = $current->next;
-        }
-        echo "NULL\n";
-    }
-}
-
-// Testing the Doubly Linked List
-$dl = new DoublyLinkedList();
-$dl->push_back(10);
-$dl->push_back(20);
-$dl->push_back(30);
-$dl->push_front(5);
-$dl->push_atpoint(15, 2);
-
-echo "Linked List after operations:\n";
-$dl->display();
-
-$dl->del_front();
-$dl->del_back();
-$dl->del_atpoint(1);
-
-echo "Linked List after deletion:\n";
-$dl->display();
-*/
 
 
 /*
