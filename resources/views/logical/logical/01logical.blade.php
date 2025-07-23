@@ -275,4 +275,18 @@ echo "<br>==================================</br>";
         str2 += str[i] 
     }
     console.log(str2);
+
+//reverse string with inbuild funcitons
+const data01 = "The quick brown fox";
+    const rev02 = data01.split("").reverse().join("");
+    //console.log('rev01', rev01, 'reve02', rev02);
+
+    const rev03 = data01.split("");
+    console.log('split', rev03);
+    const rev04 = rev03.reverse();
+    console.log('reverse', rev04);
+    const rev05 = rev04.join("");
+    console.log('reverse', rev05);
+
+
 </script>
