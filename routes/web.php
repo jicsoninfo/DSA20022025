@@ -180,6 +180,11 @@ Route::get('/sort/bubble', function () {
     return view('sort.bubble.bubble');
 });
 
+Route::get('/sort/selection', function () {
+    return view('sort.selection.selection');
+});
+
+
 //=======================================
 
 // git init
@@ -206,7 +211,7 @@ Route::get('/sort/bubble', function () {
 //https://creator.nightcafe.studio/
 //https://www.alphacodingskills.com/php/php-data-structures.php
 
-////_rureir_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_eerrtrxfsdfsdfg
+
 
 //git config --global user.name "FIRST_NAME LAST_NAME"
 //git config --global user.email "your email id"

@@ -281,12 +281,12 @@ const data01 = "The quick brown fox";
     const rev02 = data01.split("").reverse().join("");
     //console.log('rev01', rev01, 'reve02', rev02);
 
-    const rev03 = data01.split("");
+    const rev03 = data01.split(""); //Splits a string into an array of substrings based on a separator.
     console.log('split', rev03);
-    const rev04 = rev03.reverse();
+    const rev04 = rev03.reverse(); //Reverses the order of elements in an array (modifies the original array).
     console.log('reverse', rev04);
     const rev05 = rev04.join("");
-    console.log('reverse', rev05);
+    console.log('reverse', rev05); //Joins elements of an array into a single string, with an optional separator.
 
 
 </script>
