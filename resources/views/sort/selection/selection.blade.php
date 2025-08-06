@@ -125,7 +125,32 @@ echo "===================================================";
 //selection sorting through singly linked lists
 echo "Selection sort throuh singly linked list";
 
+class SortNode{
+    public $data;
+    public $next;
 
+    public function __construct($data){
+        $this->data = $data;
+        $this->next = NULL;
+    }
+
+}
+
+class LinkedListSort{
+    public $head;
+
+    public function __construct(){
+        $this->head = NULL;
+    }
+
+    //Insert new node at end
+    public functin insert($data){
+        $newNode = new SortNode($data);
+        if($this->head === NULL){
+            $this->head = $newNode;
+        }
+    }
+}
 
 */
 
@@ -764,6 +789,100 @@ composer dump-autoload
 
 ?>
 
+//////////////////////////////////////////////////////////
+binary search through linked list
+class Node {
+    public $data;
+    public $next;
+    
+    public function __construct($data) {
+        $this->data = $data;
+        $this->next = null;
+    }
+}
+
+class LinkedList {
+    public $head;
+
+    public function insert($data) {
+        $newNode = new Node($data);
+        if (!$this->head) {
+            $this->head = $newNode;
+        } else {
+            $temp = $this->head;
+            while ($temp->next) {
+                $temp = $temp->next;
+            }
+            $temp->next = $newNode;
+        }
+    }
+
+    public function printList() {
+        $temp = $this->head;
+        while ($temp) {
+            echo $temp->data . " ";
+            $temp = $temp->next;
+        }
+        echo "<br>";
+    }
+
+    // Find middle node between start and end
+    private function getMiddle($start, $end) {
+        if ($start == null) return null;
+
+        $slow = $start;
+        $fast = $start->next;
+
+        while ($fast != $end) {
+            $fast = $fast->next;
+            if ($fast != $end) {
+                $slow = $slow->next;
+                $fast = $fast->next;
+            }
+        }
+
+        return $slow;
+    }
+
+    public function binarySearch($val) {
+        $start = $this->head;
+        $end = null;
+
+        while ($start != $end) {
+            $mid = $this->getMiddle($start, $end);
+            if (!$mid) return null;
+
+            if ($mid->data == $val) {
+                return $mid;
+            } else if ($mid->data < $val) {
+                $start = $mid->next;
+            } else {
+                $end = $mid;
+            }
+        }
+
+        return null;
+    }
+}
+
+
+$list = new LinkedList();
+$values = [7, 9, 21, 26, 36, 43, 48, 54, 68];
+foreach ($values as $v) {
+    $list->insert($v);
+}
+
+$list->printList();
+$searchValue = 68;
+
+$result = $list->binarySearch($searchValue);
+
+if ($result) {
+    echo "Element $searchValue found in the list.";
+} else {
+    echo "Element $searchValue not found.";
+}
+===================================
 
 
 */
