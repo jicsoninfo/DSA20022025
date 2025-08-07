@@ -144,15 +144,90 @@ class LinkedListSort{
     }
 
     //Insert new node at end
-    public functin insert($data){
+    public function insert($data){
         $newNode = new SortNode($data);
         if($this->head === NULL){
             $this->head = $newNode;
+        }else{
+            $current = $this->head;
+            while($current->next !== NULL){
+                $current = $current->next;
+            }
+                
+            $current->next = $newNode;
         }
     }
+
+    //Display the list
+    public function display(){
+        $current = $this->head;
+        while($current !== NULL){
+            echo $current->data . " -> ";
+            $current = $current->next;
+        }
+
+        echo "NULL\n";
+    }
+
+    //Selection sort by swapping node data
+    public function selectionSort($caseInsensitive = false){
+        $start = $this->head;
+
+        while($start !== NULL){
+            $minNode = $start;
+            $current = $start->next;
+            
+            while ($current !== NULL){
+                $val1 = $caseInsensitive ? strtolower($current->data) : $current->data;
+                $val2 = $caseInsensitive ? strtolower($minNode->data) : $mindNode->data;
+
+                if($val1 < $val2){
+                    $minNode = $current;
+                }
+
+                $current = $current->next;
+            }
+
+            //Swap the data
+            if($minNode !== $start){
+                $temp = $start->data;
+                $start->data = $minNode->data;
+                $minNode->data = $temp;
+            }
+
+            $start = $start->next;
+        }
+    }
+
+
 }
 
+//Test the linked list and selection sort
+
+$lls = new LinkedListSort();
+$lls->insert("applett");
+$lls->insert("appleone");
+$lls->insert("appletwo");
+$lls->insert("applerrr");
+
+echo "<br>";
+echo "Before Sorting:\n";
+$lls->display();
+echo "<br>";
+$lls->selectionSort(true); // true = case-insensitive
+echo "<br>";
+echo "After Selection Sort:\n";
+$lls->display();
+
+echo "<br>";
+
+
+//=============================================== selection sort through dubly linked list ==================
+echo "<br>";
+echo "===========================================";
+
 */
+
 
 
 
