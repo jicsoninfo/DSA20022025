@@ -289,4 +289,76 @@ const data01 = "The quick brown fox";
     console.log('reverse', rev05); //Joins elements of an array into a single string, with an optional separator.
 
 
+
+//=======================remove duplicate values=============================
+ const arr = [1,2,2,2,3,3,3,4,4,4,5];
+    const uniarr = [... new Set(arr)];
+    console.log(uniarr);
+
+    const uniqueArr = [];
+    for(let i=0; i<arr.length; i++){
+        let exist = false;
+        for(let j=0; j<uniqueArr.length; j++){
+            if(uniqueArr[j] === arr[i]){
+                exist = true;
+                break;
+            }
+
+        }
+        if(!exist){
+            uniqueArr.push(arr[i]);
+        }
+    }
+
+    console.log(uniqueArr);
+
+
+    const arr01 = [1, 2, 2, 3, 4, 4, 5];
+    const uniqueArr01 = arr01.filter((value, index, self) => {
+    return self.indexOf(value) === index;
+    });
+    console.log(uniqueArr01); // [1, 2, 3, 4, 5]
+
+
+
+    const arr03 = ['a', 'b', 'c'];
+
+    const result = arr03.filter((element, index, array) => {
+    console.log('Element:', element);
+    console.log('Index:', index);
+    console.log('Array:', array);
+    return true; // keep all elements
+    });
+
+    console.log(result); // ['a', 'b', 'c']
+
+
+    // array.filter(callback(element, index, array))
+    // callback → A function that runs for each element.
+    // element → The current item being processed.
+    // index (optional) → The index of the current item.
+    // array (optional) → The original array.
+    // It returns a new array with only the elements where the callback returned true.
+
+    // Example 1: Filter even numbers
+   
+    const numbers = [1, 2, 3, 4, 5, 6];
+    const evenNumbers = numbers.filter(function(num) {
+    return num % 2 === 0;
+    });
+    console.log(evenNumbers); // [2, 4, 6]
+
+    // /Same Example with Arrow Function (ES6+)
+    const evenNumbers02 = numbers.filter(num => num % 2 === 0);
+
+
+
+    //Example 2: Filter names longer than 3 characters
+    const names = ['Ali', 'Sara', 'Bob', 'John', 'Alex'];
+
+    const longNames = names.filter(name => name.length > 3);
+    console.log(longNames); // ['Sara', 'John', 'Alex']
+
+//=======================remove duplicate values=============================
+
 </script>
